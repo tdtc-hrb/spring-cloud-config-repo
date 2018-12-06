@@ -1,0 +1,26 @@
+server:
+  port: 8766
+
+eureka:
+  client:
+    register-with-eureka: false
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+        
+zuul:
+  routes:
+    user:
+      path: /user/**
+      serviceId: user-service
+    cas-client:
+      path: /login/**
+      serviceId: cas-client
+      stripPrefix: false
+      
+hystrix:
+  command:
+    default: 
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 8000

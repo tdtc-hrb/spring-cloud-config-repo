@@ -1,0 +1,55 @@
+server:
+  port: 8760
+      
+spring:
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+        register: false
+        tags:
+          - version=0.11
+          - author=xiaobin
+---
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: cas-client
+        uri: lb://cas-client
+        predicates:
+        - Path=/login/**
+
+      - id: user-service
+        uri: lb://user-service
+        predicates:
+        - Path=/user/**
+        filters:
+        - StripPrefix=1
+        - name: RequestRateLimiter
+          args:
+            key-resolver: "#{@remoteAddrKeyResolver}"
+            redis-rate-limiter.replenishRate: 1
+            redis-rate-limiter.burstCapacity: 5
+
+---
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#      - id: user-service
+#        uri: lb://user-service
+#        predicates:
+#        - Path=/user/**
+#        filters:
+#        - StripPrefix=1
