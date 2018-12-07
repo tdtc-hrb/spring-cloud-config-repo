@@ -29,3 +29,8 @@ hystrix:
 feign:
   hystrix:
     enabled: true
+---
+zuul:
+  host:
+    connect-timeout-millis: 10000
+    socket-timeout-millis: 30000
