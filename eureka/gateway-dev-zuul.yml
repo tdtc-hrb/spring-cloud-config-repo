@@ -35,5 +35,5 @@ zuul:
     connect-timeout-millis: 10000
     socket-timeout-millis: 30000
 ribbon:
-  ReadTimeout: 7000
-  ConnectTimeout: 7000
+  ReadTimeout: 2000
+  ConnectTimeout: 2000
