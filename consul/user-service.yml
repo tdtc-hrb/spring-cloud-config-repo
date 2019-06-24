@@ -10,3 +10,6 @@ spring:
         tags:
           - version=0.1
           - author=xiaobin
+
+opentracing.jaeger.http-sender.url: http://localhost:14268/api/traces
+opentracing.jaeger.log-spans: true

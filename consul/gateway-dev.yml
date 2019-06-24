@@ -43,6 +43,9 @@ spring:
     port: 6379
     database: 0
 
+opentracing.jaeger.http-sender.url: http://localhost:14268/api/traces
+opentracing.jaeger.log-spans: true
+
 #spring:
 #  cloud:
 #    gateway:
